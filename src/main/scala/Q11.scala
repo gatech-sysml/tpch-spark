@@ -23,7 +23,7 @@ class Q11 extends TpchQuery {
 
     tmp.groupBy($"ps_partkey").agg(sum("value").as("part_value"))
       .join(sumRes, $"part_value" > mul01($"total_value"))
-      .sort($"part_value".desc)
+      // .sort($"part_value".desc)
   }
 
 }

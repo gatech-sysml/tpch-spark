@@ -18,14 +18,28 @@ class Q16 extends TpchQuery {
       numbers($"p_size"))
       .select($"p_partkey", $"p_brand", $"p_type", $"p_size")
 
-    supplier.filter(!complains($"s_comment"))
+    val intermediateResult = supplier.filter(!complains($"s_comment"))
       // .select($"s_suppkey")
       .join(partsupp, $"s_suppkey" === partsupp("ps_suppkey"))
       .select($"ps_partkey", $"ps_suppkey")
       .join(fparts, $"ps_partkey" === fparts("p_partkey"))
       .groupBy($"p_brand", $"p_type", $"p_size")
       .agg(countDistinct($"ps_suppkey").as("supplier_count"))
-      .sort($"supplier_count".desc, $"p_brand", $"p_type", $"p_size")
+      // .sort($"supplier_count".desc, $"p_brand", $"p_type", $"p_size")
+
+    // Repartition the data based on the grouping keys
+    val repartitionedResult = intermediateResult.repartition($"supplier_count", $"p_brand", $"p_type", $"p_size")
+
+    // Group by a constant column to shuffle the data
+    val groupedResult1 = repartitionedResult.groupBy(lit(1)).agg(count($"*"))
+
+    // Group by another constant column to shuffle the data further
+    // val groupedResult2 = groupedResult1.groupBy(lit(1)).agg(count($"*"))
+
+    // Perform an additional transformation to introduce another stage
+    val finalResult = groupedResult1.filter($"1" === 1)
+
+    finalResult
   }
 
 }

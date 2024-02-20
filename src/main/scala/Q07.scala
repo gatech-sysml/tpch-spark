@@ -21,7 +21,7 @@ class Q07 extends TpchQuery {
       .join(fline, $"s_suppkey" === fline("l_suppkey"))
       .select($"n_name".as("supp_nation"), $"l_orderkey", $"l_extendedprice", $"l_discount", $"l_shipdate")
 
-    fnation.join(customer, $"n_nationkey" === customer("c_nationkey"))
+    val intermediateResult = fnation.join(customer, $"n_nationkey" === customer("c_nationkey"))
       .join(order, $"c_custkey" === order("o_custkey"))
       .select($"n_name".as("cust_nation"), $"o_orderkey")
       .join(supNation, $"o_orderkey" === supNation("l_orderkey"))
@@ -32,7 +32,21 @@ class Q07 extends TpchQuery {
         decrease($"l_extendedprice", $"l_discount").as("volume"))
       .groupBy($"supp_nation", $"cust_nation", $"l_year")
       .agg(sum($"volume").as("revenue"))
-      .sort($"supp_nation", $"cust_nation", $"l_year")
+      // .sort($"supp_nation", $"cust_nation", $"l_year")
+
+      // Repartition the data based on the grouping keys
+    val repartitionedResult = intermediateResult.repartition($"supp_nation", $"cust_nation", $"l_year")
+
+    // Group by a constant column to shuffle the data
+    val groupedResult1 = repartitionedResult.groupBy(lit(1)).agg(count($"*"))
+
+    // Group by another constant column to shuffle the data further
+    val groupedResult2 = groupedResult1.groupBy(lit(1)).agg(count($"*"))
+
+    // Perform an additional transformation to introduce another stage
+    val finalResult = groupedResult2.filter($"1" === 1)
+
+    finalResult
   }
 
 }

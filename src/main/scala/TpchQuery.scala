@@ -89,6 +89,7 @@ object TpchQuery {
     val cwd = System.getProperty("user.dir")
     val inputDataDir = sys.env.getOrElse("TPCH_INPUT_DATA_DIR", "file://" + cwd + "/dbgen")
     val queryOutputDir = sys.env.getOrElse("TPCH_QUERY_OUTPUT_DIR", inputDataDir + "/output")
+    // val queryOutputDir = ""
     val executionTimesPath = sys.env.getOrElse("TPCH_EXECUTION_TIMES", cwd + "/tpch_execution_times.txt")
 
     val spark = SparkSession

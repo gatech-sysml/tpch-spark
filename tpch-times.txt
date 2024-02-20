@@ -1,0 +1,290 @@
+Query	Time (seconds)
+Q01	10.09594250
+Query	Time (seconds)
+Q01	10.35550594
+Query	Time (seconds)
+Q01	9.95172024
+Query	Time (seconds)
+Q01	3.51904011
+Query	Time (seconds)
+Q01	3.46900010
+Query	Time (seconds)
+Q01	3.38828754
+Query	Time (seconds)
+Q02	4.30291510
+Query	Time (seconds)
+Q02	6.31803465
+Query	Time (seconds)
+Q02	7.64416313
+Query	Time (seconds)
+Q02	8.30550194
+Query	Time (seconds)
+Q02	10.55873966
+Query	Time (seconds)
+Q01	5.97594213
+Query	Time (seconds)
+Q05	12.67428017
+Query	Time (seconds)
+Q08	12.61857033
+Query	Time (seconds)
+Q01	6.05176687
+Query	Time (seconds)
+Q05	11.33759308
+Query	Time (seconds)
+Q08	10.29715061
+Query	Time (seconds)
+Q01	5.21623278
+Query	Time (seconds)
+Q05	7.79712772
+Query	Time (seconds)
+Q08	8.13065147
+Query	Time (seconds)
+Q01	6.15602875
+Query	Time (seconds)
+Q05	11.29381275
+Query	Time (seconds)
+Q08	10.26250172
+Query	Time (seconds)
+Q02	7.43307066
+Query	Time (seconds)
+Q03	7.41808605
+Query	Time (seconds)
+Q04	7.96577835
+Query	Time (seconds)
+Q06	3.75139260
+Query	Time (seconds)
+Q07	10.91889191
+Query	Time (seconds)
+Q09	12.26717758
+Query	Time (seconds)
+Q10	8.45743275
+Query	Time (seconds)
+Q11	9.08297348
+Query	Time (seconds)
+Q12	8.65211773
+Query	Time (seconds)
+Q13	8.03085995
+Query	Time (seconds)
+Q14	6.67338753
+Query	Time (seconds)
+Q15	6.02487421
+Query	Time (seconds)
+Q16	9.72910595
+Query	Time (seconds)
+Q17	6.97114038
+Query	Time (seconds)
+Q01	6.22242832
+Query	Time (seconds)
+Q02	10.85036469
+Query	Time (seconds)
+Q03	7.85896683
+Query	Time (seconds)
+Q04	7.83345795
+Query	Time (seconds)
+Q05	12.03240490
+Query	Time (seconds)
+Q06	4.02220917
+Query	Time (seconds)
+Q07	11.70133018
+Query	Time (seconds)
+Q08	12.87361431
+Query	Time (seconds)
+Q09	14.39230251
+Query	Time (seconds)
+Q10	9.35478878
+Query	Time (seconds)
+Q11	9.65396500
+Query	Time (seconds)
+Q12	8.46375370
+Query	Time (seconds)
+Q13	8.86843014
+Query	Time (seconds)
+Q14	6.58477020
+Query	Time (seconds)
+Q15	7.42868471
+Query	Time (seconds)
+Q16	12.54270935
+Query	Time (seconds)
+Q17	8.32193661
+Query	Time (seconds)
+Q18	8.73841476
+Query	Time (seconds)
+Q19	6.24244976
+Query	Time (seconds)
+Q20	10.26148129
+Query	Time (seconds)
+Q21	17.21163177
+Query	Time (seconds)
+Q22	8.63811970
+Query	Time (seconds)
+Q01	6.16198349
+Query	Time (seconds)
+Q01	6.18909216
+Query	Time (seconds)
+Q01	6.04975605
+Query	Time (seconds)
+Q01	6.43508959
+Query	Time (seconds)
+Q01	6.19108629
+Query	Time (seconds)
+Q01	6.18742943
+Query	Time (seconds)
+Q01	6.32759285
+Query	Time (seconds)
+Q01	6.00890827
+Query	Time (seconds)
+Q01	6.29583168
+Query	Time (seconds)
+Q05	11.78726482
+Query	Time (seconds)
+Q01	6.30768585
+Query	Time (seconds)
+Q01	6.17018175
+Query	Time (seconds)
+Q01	6.38835764
+Query	Time (seconds)
+Q01	6.36784267
+Query	Time (seconds)
+Q01	6.25019360
+Query	Time (seconds)
+Q01	5.89457035
+Query	Time (seconds)
+Q01	5.42123842
+Query	Time (seconds)
+Q01	5.03390169
+Query	Time (seconds)
+Q01	5.46673155
+Query	Time (seconds)
+Q01	5.67594719
+Query	Time (seconds)
+Q02	10.78332901
+Query	Time (seconds)
+Q05	12.04406643
+Query	Time (seconds)
+Q08	12.24033451
+Query	Time (seconds)
+Q09	13.55313301
+Query	Time (seconds)
+Q01	6.17875528
+Query	Time (seconds)
+Q01	5.61691236
+Query	Time (seconds)
+Q01	6.06326294
+Query	Time (seconds)
+Q01	10.95925522
+Query	Time (seconds)
+Q01	7.77217007
+Query	Time (seconds)
+Q01	6.35209370
+Query	Time (seconds)
+Q01	5.82655334
+Query	Time (seconds)
+Q01	5.62091446
+Query	Time (seconds)
+Q01	5.98100042
+Query	Time (seconds)
+Q01	5.91418934
+Query	Time (seconds)
+Q01	189.69245911
+Query	Time (seconds)
+Q01	5.81523752
+Query	Time (seconds)
+Q01	5.85712624
+Query	Time (seconds)
+Q01	6.79802418
+Query	Time (seconds)
+Q02	10.95464230
+Query	Time (seconds)
+Q02	10.56513882
+Query	Time (seconds)
+Q02	11.06587219
+Query	Time (seconds)
+Q02	10.86719036
+Query	Time (seconds)
+Q02	10.28565502
+Query	Time (seconds)
+Q03	8.64662552
+Query	Time (seconds)
+Q01	6.74904299
+Query	Time (seconds)
+Q04	7.96558952
+Query	Time (seconds)
+Q04	8.78153419
+Query	Time (seconds)
+Q05	12.02915859
+Query	Time (seconds)
+Q05	12.48069191
+Query	Time (seconds)
+Q05	13.06779003
+Query	Time (seconds)
+Q05	13.15502453
+Query	Time (seconds)
+Q06	3.89756107
+Query	Time (seconds)
+Q07	12.19375229
+Query	Time (seconds)
+Q07	11.58590508
+Query	Time (seconds)
+Q07	13.32487297
+Query	Time (seconds)
+Q08	12.97247791
+Query	Time (seconds)
+Q08	12.54872894
+Query	Time (seconds)
+Q08	12.80861092
+Query	Time (seconds)
+Q09	14.63875389
+Query	Time (seconds)
+Q09	13.80524826
+Query	Time (seconds)
+Q09	14.36873436
+Query	Time (seconds)
+Q10	8.73066521
+Query	Time (seconds)
+Q12	8.67754841
+Query	Time (seconds)
+Q12	8.60263729
+Query	Time (seconds)
+Q12	8.52767467
+Query	Time (seconds)
+Q13	8.86572838
+Query	Time (seconds)
+Q13	8.56783867
+Query	Time (seconds)
+Q13	8.92457104
+Query	Time (seconds)
+Q13	8.66540241
+Query	Time (seconds)
+Q14	6.90667677
+Query	Time (seconds)
+Q16	12.12618065
+Query	Time (seconds)
+Q16	10.73268414
+Query	Time (seconds)
+Q16	12.44295406
+Query	Time (seconds)
+Q16	11.70298004
+Query	Time (seconds)
+Q19	6.85787868
+Query	Time (seconds)
+Q11	9.76624393
+Query	Time (seconds)
+Q11	8.60102463
+Query	Time (seconds)
+Q15	7.46833181
+Query	Time (seconds)
+Q15	7.34410429
+Query	Time (seconds)
+Q17	8.28042126
+Query	Time (seconds)
+Q18	9.05768108
+Query	Time (seconds)
+Q20	10.85508347
+Query	Time (seconds)
+Q22	8.50023842
+Query	Time (seconds)
+Q21	18.12865448
+Query	Time (seconds)
+Q22	7.09863806
+Query	Time (seconds)
+Q20	10.42727757

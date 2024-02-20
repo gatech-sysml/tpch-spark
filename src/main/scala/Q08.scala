@@ -24,7 +24,7 @@ class Q08 extends TpchQuery {
       join(fpart, $"l_partkey" === fpart("p_partkey"))
       .join(nat, $"l_suppkey" === nat("s_suppkey"))
 
-    nation.join(fregion, $"n_regionkey" === fregion("r_regionkey"))
+    val intermediateResult = nation.join(fregion, $"n_regionkey" === fregion("r_regionkey"))
       .select($"n_nationkey")
       .join(customer, $"n_nationkey" === customer("c_nationkey"))
       .select($"c_custkey")
@@ -35,7 +35,21 @@ class Q08 extends TpchQuery {
         isBrazil($"n_name", $"volume").as("case_volume"))
       .groupBy($"o_year")
       .agg(sum($"case_volume") / sum("volume"))
-      .sort($"o_year")
+      // .sort($"o_year")
+
+      // Repartition the data based on the grouping keys
+    val repartitionedResult = intermediateResult.repartition($"o_year")
+
+    // Group by a constant column to shuffle the data
+    val groupedResult1 = repartitionedResult.groupBy(lit(1)).agg(count($"*"))
+
+    // Group by another constant column to shuffle the data further
+    val groupedResult2 = groupedResult1.groupBy(lit(1)).agg(count($"*"))
+
+    // Perform an additional transformation to introduce another stage
+    val finalResult = groupedResult2.filter($"1" === 1)
+
+    finalResult
   }
 
 }

@@ -28,6 +28,6 @@ class Q22 extends TpchQuery {
       .filter($"c_acctbal" > $"avg_acctbal")
       .groupBy($"cntrycode")
       .agg(count($"c_acctbal"), sum($"c_acctbal"))
-      .sort($"cntrycode")
+      // .sort($"cntrycode")
   }
 }

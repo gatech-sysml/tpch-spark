@@ -22,7 +22,7 @@ class Q15 extends TpchQuery {
       .join(revenue, $"max_total" === revenue("total"))
       .join(supplier, $"l_suppkey" === supplier("s_suppkey"))
       .select($"s_suppkey", $"s_name", $"s_address", $"s_phone", $"total")
-      .sort($"s_suppkey")
+      // .sort($"s_suppkey")
   }
 
 }

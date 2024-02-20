@@ -12,12 +12,25 @@ class Q01 extends TpchQuery {
     val decrease = udf { (x: Double, y: Double) => x * (1 - y) }
     val increase = udf { (x: Double, y: Double) => x * (1 + y) }
 
-    schemaProvider.lineitem.filter($"l_shipdate" <= "1998-09-02")
+    val intermediateResult = schemaProvider.lineitem.filter($"l_shipdate" <= "1998-09-02")
       .groupBy($"l_returnflag", $"l_linestatus")
       .agg(sum($"l_quantity"), sum($"l_extendedprice"),
         sum(decrease($"l_extendedprice", $"l_discount")),
         sum(increase(decrease($"l_extendedprice", $"l_discount"), $"l_tax")),
         avg($"l_quantity"), avg($"l_extendedprice"), avg($"l_discount"), count($"l_quantity"))
-      .sort($"l_returnflag", $"l_linestatus")
+
+    // Repartition the data based on the grouping keys
+    val repartitionedResult = intermediateResult.repartition($"l_returnflag", $"l_linestatus")
+
+    // Group by a constant column to shuffle the data
+    val groupedResult1 = repartitionedResult.groupBy(lit(1)).agg(count($"*"))
+
+    // Group by another constant column to shuffle the data further
+    val groupedResult2 = groupedResult1.groupBy(lit(1)).agg(count($"*"))
+
+    // Perform an additional transformation to introduce another stage
+    val finalResult = groupedResult2.filter($"1" === 1)
+
+    finalResult
   }
 }

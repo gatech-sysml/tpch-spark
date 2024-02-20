@@ -27,7 +27,7 @@ class Q20 extends TpchQuery {
       .select($"ps_suppkey").distinct
       .join(nat_supp, $"ps_suppkey" === nat_supp("s_suppkey"))
       .select($"s_name", $"s_address")
-      .sort($"s_name")
+      // .sort($"s_name")
   }
 
 }

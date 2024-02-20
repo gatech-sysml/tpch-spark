@@ -13,7 +13,7 @@ class Q12 extends TpchQuery {
     val highPriority = udf { (x: String) => if (x == "1-URGENT" || x == "2-HIGH") 1 else 0 }
     val lowPriority = udf { (x: String) => if (x != "1-URGENT" && x != "2-HIGH") 1 else 0 }
 
-    lineitem.filter((
+    val intermediateResult = lineitem.filter((
       $"l_shipmode" === "MAIL" || $"l_shipmode" === "SHIP") &&
       $"l_commitdate" < $"l_receiptdate" &&
       $"l_shipdate" < $"l_commitdate" &&
@@ -23,7 +23,21 @@ class Q12 extends TpchQuery {
       .groupBy($"l_shipmode")
       .agg(sum(highPriority($"o_orderpriority")).as("sum_highorderpriority"),
         sum(lowPriority($"o_orderpriority")).as("sum_loworderpriority"))
-      .sort($"l_shipmode")
+      // .sort($"l_shipmode")
+
+    // Repartition the data based on the grouping keys
+    val repartitionedResult = intermediateResult.repartition($"l_shipmode")
+
+    // Group by a constant column to shuffle the data
+    val groupedResult1 = repartitionedResult.groupBy(lit(1)).agg(count($"*"))
+
+    // Group by another constant column to shuffle the data further
+    val groupedResult2 = groupedResult1.groupBy(lit(1)).agg(count($"*"))
+
+    // Perform an additional transformation to introduce another stage
+    val finalResult = groupedResult2.filter($"1" === 1)
+
+    finalResult
   }
 
 }
