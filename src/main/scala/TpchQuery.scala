@@ -94,7 +94,7 @@ object TpchQuery {
 
     val spark = SparkSession
       .builder
-      .appName("TPC-H v3.0.0 Spark")
+      .appName("TPCH_Q" + queryNum.get)
       .getOrCreate()
     val schemaProvider = new TpchSchemaProvider(spark, inputDataDir)
 

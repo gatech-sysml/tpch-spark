@@ -28,16 +28,7 @@ class Q12 extends TpchQuery {
     // Repartition the data based on the grouping keys
     val repartitionedResult = intermediateResult.repartition($"l_shipmode")
 
-    // Group by a constant column to shuffle the data
-    val groupedResult1 = repartitionedResult.groupBy(lit(1)).agg(count($"*"))
-
-    // Group by another constant column to shuffle the data further
-    val groupedResult2 = groupedResult1.groupBy(lit(1)).agg(count($"*"))
-
-    // Perform an additional transformation to introduce another stage
-    val finalResult = groupedResult2.filter($"1" === 1)
-
-    finalResult
+    repartitionedResult
   }
 
 }
