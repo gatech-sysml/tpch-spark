@@ -1,5 +1,7 @@
 *.class
 *.log
+*.txt
+*tpch-results*
 
 # sbt specific
 .cache

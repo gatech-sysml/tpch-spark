@@ -72,48 +72,54 @@ object TpchQuery {
   }
 
   def main(args: Array[String]): Unit = {
-    // parse command line arguments: expecting _at most_ 1 argument denoting which query to run
-    // if no query is given, all queries 1..22 are run.
-    if (args.length > 1)
-      println("Expected at most 1 argument: query to run. No arguments = run all 22 queries.")
-    val queryNum = if (args.length == 1) {
-      try {
-        Some(Integer.parseInt(args(0).trim))
-      } catch {
-        case e: Exception => None
-      }
-    } else
-      None
+    // Parse command line arguments
+    val (queryNum, appName) = args.length match {
+      case 0 => (None, Some("TPC-H v3.0.0 Spark All 22")) // Run all queries with default name
+      case 1 =>
+        val arg = args(0).trim
+        if (arg.matches("\\d+")) (Some(arg.toInt), Some(s"TPCH Query $arg")) // Single argument is a query number
+        else (None, Some(arg)) // Single argument is an application name
+      case 2 =>
+        (Some(args(0).toInt), Some(args(1))) // Two arguments: query number and application name 
+      case 3 =>
+        val queryNum = args(0).toInt
+        val datasetSize = args(1).toInt
+        val maxCores = args(2).toInt
+        // Three arguments: query number, dataset size, and max cores
+        (Some(queryNum), Some(s"TPCH Query $queryNum $datasetSize $maxCores")) 
+      case _ =>
+        println("Expected at most 3 arguments: query number, dataset size, and max cores.")
+        return
+    }
 
-    // get paths from env variables else use default
+    // Get paths from environment variables or use default
     val cwd = System.getProperty("user.dir")
-    val inputDataDir = sys.env.getOrElse("TPCH_INPUT_DATA_DIR", "file://" + cwd + "/dbgen")
-    val queryOutputDir = sys.env.getOrElse("TPCH_QUERY_OUTPUT_DIR", inputDataDir + "/output")
-    // val queryOutputDir = ""
-    val executionTimesPath = sys.env.getOrElse("TPCH_EXECUTION_TIMES", cwd + "/tpch_execution_times.txt")
+    val inputDataDir = sys.env.getOrElse("TPCH_INPUT_DATA_DIR", s"file://$cwd/dbgen")
+    val queryOutputDir = sys.env.getOrElse("TPCH_QUERY_OUTPUT_DIR", s"$inputDataDir/output")
+    val executionTimesPath = sys.env.getOrElse("TPCH_EXECUTION_TIMES", s"$cwd/tpch_execution_times.txt")
 
-    val spark = SparkSession
-      .builder
-      .appName("TPCH_Q" + queryNum.get)
-      .getOrCreate()
+    // Create SparkSession with specified or default application name
+    val spark = appName match {
+      case Some(name) => SparkSession.builder.appName(name).getOrCreate()
+    }
+
+    // Create schema provider
     val schemaProvider = new TpchSchemaProvider(spark, inputDataDir)
 
-    // execute queries
+    // Execute queries
     val executionTimes = executeQueries(spark, schemaProvider, queryNum, queryOutputDir)
+
+    // Close SparkSession
     spark.close()
 
-    // write execution times to file
-    if (executionTimes.length > 0) {
+    // Write execution times to file
+    if (executionTimes.nonEmpty) {
       val outfile = new File(executionTimesPath)
       val bw = new BufferedWriter(new FileWriter(outfile, true))
-
-      bw.write(f"Query\tTime (seconds)\n")
-      executionTimes.foreach {
-        case (key, value) => bw.write(f"${key}%s\t${value}%1.8f\n")
-      }
+      bw.write("Query\tTime (seconds)\n")
+      executionTimes.foreach { case (key, value) => bw.write(s"$key\t$value\n") }
       bw.close()
-
-      println(f"Execution times written in ${outfile}.")
+      println(s"Execution times written in $outfile.")
     }
 
     println("Execution complete.")
