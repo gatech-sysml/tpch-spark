@@ -86,9 +86,16 @@ object TpchQuery {
         val datasetSize = args(1).toInt
         val maxCores = args(2).toInt
         // Three arguments: query number, dataset size, and max cores
-        (Some(queryNum), Some(s"TPCH Query $queryNum $datasetSize $maxCores")) 
+        (Some(queryNum), Some(s"TPCH Query $queryNum $datasetSize $maxCores"))
+      case 4 =>
+        val queryNum = args(0).toInt
+        val index = args(1).toInt
+        val datasetSize = args(2).toInt
+        val maxCores = args(3).toInt
+        // Four arguments: query number, index, dataset size, max cores
+        (Some(queryNum), Some(s"TPCH Query $queryNum $index $datasetSize $maxCores"))
       case _ =>
-        println("Expected at most 3 arguments: query number, dataset size, and max cores.")
+        println("Expected at most 4 arguments: query number, index, dataset size, and max cores.")
         return
     }
 
