@@ -24,3 +24,4 @@ dbgen/*.tbl
 dbgen/*.o
 dbgen/dbgen
 dbgen/qgen
+dbgen/output
